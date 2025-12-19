@@ -1,0 +1,67 @@
+[
+    {
+        "title": "AI Resume Builder",
+        "description": "An AI-powered application leveraging OpenAI GPT-4 to create ATS-optimized resumes tailored to specific job descriptions. Features real-time generation and customization.",
+        "tech": [
+            "TypeScript",
+            "OpenAI API",
+            "React"
+        ],
+        "github": "https://github.com/Patel-Prerak/RESUME-BUILDER",
+        "link": null
+    },
+    {
+        "title": "Sahayak - Service on Demand",
+        "description": "A comprehensive service-on-demand web application connecting users with local service providers. Features user authentication, booking management, and real-time updates.",
+        "tech": [
+            "MERN Stack",
+            "Redux",
+            "JWT"
+        ],
+        "github": "https://github.com/Patel-Prerak/Sahayak",
+        "link": null
+    },
+    {
+        "title": "E-Commerce & Fitness App",
+        "description": "A dual-domain platform featuring a robust e-commerce marketplace and a personalized fitness tracking mobile application.",
+        "tech": [
+            "React Native",
+            "Node.js",
+            "Express"
+        ],
+        "github": null,
+        "link": "https://deployx.in/projects"
+    },
+    {
+        "title": "Shree Voluntary Blood Bank",
+        "description": "A digital platform to streamline blood donation processes, inventory management, and donor connection for a leading blood bank.",
+        "tech": [
+            "Web Dev",
+            "Database Management"
+        ],
+        "github": null,
+        "link": "https://deployx.in/projects"
+    },
+    {
+        "title": "Email Security Analyzer",
+        "description": "Full-stack application that analyzes email headers to reveal travel paths and service providers, enhancing email security visibility.",
+        "tech": [
+            "TypeScript",
+            "Node.js",
+            "Security"
+        ],
+        "github": "https://github.com/Patel-Prerak/Email-Service-Provider",
+        "link": null
+    },
+    {
+        "title": "Network Security Lab",
+        "description": "A collection of python implementations for various cryptography algorithms including classical ciphers, hashing, and key exchange protocols.",
+        "tech": [
+            "Python",
+            "Cryptography",
+            "Security"
+        ],
+        "github": "https://github.com/Patel-Prerak/network_security_lab",
+        "link": null
+    }
+]
