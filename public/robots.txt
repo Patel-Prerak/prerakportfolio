@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prerak-portfolio-b3pla962l-patelprerak435-1434s-projects.vercel.app/sitemap.xml
