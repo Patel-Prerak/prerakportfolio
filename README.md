@@ -63,5 +63,5 @@ This portfolio is deployed on Vercel. To deploy your own version:
 - **Theme:** Edit variables in `src/index.css` to change colors.
 - **Content:** Update components in `src/components/` to change text or add new projects.
 - **SEO:** Update meta tags in `index.html` and the SEO component.
-- **Logo:** Replace `/public/logo-v2.svg` with your own logo.
+- **Logo:** Replace `/public/logo.svg` with your own logo.
 
