@@ -69,8 +69,7 @@ const Navbar = () => {
               textDecoration: 'none'
             }}
           >
-            <span className="gradient-text">PP</span>
-            <span style={{ color: 'var(--text-muted)', fontWeight: 400, marginLeft: '2px' }}>.</span>
+            <img src="/logo-v2.svg" alt="PP" style={{ height: '32px', width: 'auto' }} />
           </motion.a>
 
           {/* Desktop Navigation */}
