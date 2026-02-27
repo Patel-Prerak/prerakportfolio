@@ -4,6 +4,26 @@ import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 
+const FloatingCodeSnippet = ({ code, style, delay = 0 }) => (
+    <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.5 + delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+            position: 'absolute',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.7rem',
+            color: 'rgba(124, 92, 252, 0.25)',
+            whiteSpace: 'pre',
+            pointerEvents: 'none',
+            userSelect: 'none',
+            ...style
+        }}
+    >
+        {code}
+    </motion.div>
+);
+
 const Hero = () => {
     const particlesInit = useCallback(async engine => {
         await loadSlim(engine);
@@ -12,6 +32,7 @@ const Hero = () => {
     const [displayText, setDisplayText] = useState('');
     const [roleIndex, setRoleIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [count, setCount] = useState(0);
 
     const roles = [
         'Full Stack Developer',
@@ -46,6 +67,18 @@ const Hero = () => {
         return () => clearTimeout(timeout);
     }, [displayText, isDeleting, roleIndex]);
 
+    // Animated counter
+    useEffect(() => {
+        const target = 8;
+        const interval = setInterval(() => {
+            setCount(prev => {
+                if (prev >= target) { clearInterval(interval); return target; }
+                return prev + 1;
+            });
+        }, 200);
+        return () => clearInterval(interval);
+    }, []);
+
     const particlesOptions = {
         background: { opacity: 0 },
         fpsLimit: 120,
@@ -55,28 +88,28 @@ const Hero = () => {
                 resize: true,
             },
             modes: {
-                grab: { distance: 140, links: { opacity: 0.3 } },
+                grab: { distance: 160, links: { opacity: 0.4 } },
             },
         },
         particles: {
-            color: { value: ["#7c5cfc", "#00d4ff", "#ff6b9d"] },
+            color: { value: ["#7c5cfc", "#00d4ff", "#ff6b9d", "#ffd166"] },
             links: {
                 color: "#7c5cfc",
                 distance: 150,
                 enable: true,
-                opacity: 0.06,
+                opacity: 0.05,
                 width: 1,
             },
             move: {
                 enable: true,
-                speed: 0.5,
+                speed: 0.4,
                 direction: "none",
                 random: true,
                 straight: false,
                 outModes: { default: "out" },
             },
-            number: { density: { enable: true, area: 1200 }, value: 40 },
-            opacity: { value: { min: 0.1, max: 0.4 } },
+            number: { density: { enable: true, area: 1200 }, value: 50 },
+            opacity: { value: { min: 0.1, max: 0.5 } },
             shape: { type: "circle" },
             size: { value: { min: 1, max: 3 } },
         },
@@ -87,17 +120,17 @@ const Hero = () => {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+            transition: { staggerChildren: 0.15, delayChildren: 0.2 }
         }
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 50, filter: 'blur(10px)' },
+        hidden: { opacity: 0, y: 60, filter: 'blur(12px)' },
         visible: {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+            transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
         }
     };
 
@@ -118,112 +151,152 @@ const Hero = () => {
                 style={{ position: 'absolute', inset: 0, zIndex: 0 }}
             />
 
-            {/* Grid pattern overlay */}
+            {/* Animated Grid Pattern */}
             <div style={{
                 position: 'absolute',
                 inset: 0,
                 backgroundImage: `
-                    linear-gradient(rgba(124, 92, 252, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(124, 92, 252, 0.03) 1px, transparent 1px)
+                    linear-gradient(rgba(124, 92, 252, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(124, 92, 252, 0.04) 1px, transparent 1px)
                 `,
-                backgroundSize: '80px 80px',
+                backgroundSize: '60px 60px',
                 zIndex: 0,
-                maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)',
-                WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)'
+                maskImage: 'radial-gradient(ellipse 80% 60% at center, black 20%, transparent 70%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at center, black 20%, transparent 70%)'
             }} />
 
-            {/* Radial glow */}
-            <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '800px',
-                height: '800px',
-                background: 'radial-gradient(circle, rgba(124, 92, 252, 0.08) 0%, transparent 70%)',
-                zIndex: 0,
-                pointerEvents: 'none'
-            }} />
+            {/* Central Radial Glow - Bigger and more vibrant */}
+            <motion.div
+                animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.08, 0.12, 0.08]
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '1000px',
+                    height: '1000px',
+                    background: 'radial-gradient(circle, rgba(124, 92, 252, 0.12) 0%, rgba(0, 212, 255, 0.05) 40%, transparent 70%)',
+                    zIndex: 0,
+                    pointerEvents: 'none'
+                }}
+            />
+
+            {/* Floating code snippets - ambient decoration */}
+            <FloatingCodeSnippet
+                code={`const dev = {\n  name: "Prerak",\n  role: "Full Stack"\n};`}
+                style={{ top: '15%', left: '8%' }}
+                delay={0}
+            />
+            <FloatingCodeSnippet
+                code={`async function deploy() {\n  await build();\n  return "🚀";\n}`}
+                style={{ bottom: '20%', right: '6%' }}
+                delay={0.3}
+            />
+            <FloatingCodeSnippet
+                code={`// securing the web\nif (threat) {\n  neutralize(threat);\n}`}
+                style={{ top: '25%', right: '10%' }}
+                delay={0.6}
+            />
 
             <motion.div
                 className="container"
-                style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: '900px', width: '100%' }}
+                style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: '950px', width: '100%' }}
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
             >
-                {/* Status Badge */}
-                <motion.div
-                    variants={itemVariants}
-                    style={{ marginBottom: '2rem' }}
-                >
-                    <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '0.5rem 1.25rem',
-                        borderRadius: '100px',
-                        background: 'rgba(124, 92, 252, 0.1)',
-                        border: '1px solid rgba(124, 92, 252, 0.2)',
-                        fontSize: '0.85rem',
-                        fontWeight: 500,
-                        color: 'var(--accent-1)',
-                        fontFamily: 'var(--font-mono)'
-                    }}>
-                        <span style={{
-                            width: '8px',
-                            height: '8px',
-                            borderRadius: '50%',
-                            background: '#4ade80',
-                            boxShadow: '0 0 10px rgba(74, 222, 128, 0.5)',
-                            animation: 'pulse-dot 2s ease-in-out infinite'
-                        }} />
-                        Available for opportunities
-                    </span>
-                </motion.div>
 
-                {/* Name */}
+
+                {/* Name with enhanced typography */}
                 <motion.h1
                     variants={itemVariants}
                     style={{
-                        fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+                        fontSize: 'clamp(3rem, 7.5vw, 6rem)',
                         fontWeight: 900,
-                        lineHeight: 1.05,
-                        marginBottom: '1rem',
+                        lineHeight: 1.02,
+                        marginBottom: '1.25rem',
                         letterSpacing: '-3px'
                     }}
                 >
-                    Hi, I'm{' '}
-                    <span className="gradient-text">Prerak</span>
-                    <br />
-                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.6em', fontWeight: 600, letterSpacing: '-1px' }}>
-                        I build things for the web & secure them.
+                    <span style={{ color: 'var(--text-primary)', position: 'relative' }}>
+                        Hi, I'm{' '}
                     </span>
+                    <span className="gradient-text" style={{ position: 'relative' }}>
+                        Prerak
+                        {/* Underline glow effect */}
+                        <motion.span
+                            initial={{ width: 0 }}
+                            animate={{ width: '100%' }}
+                            transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            style={{
+                                position: 'absolute',
+                                bottom: '2px',
+                                left: 0,
+                                height: '4px',
+                                background: 'linear-gradient(90deg, var(--accent-1), var(--accent-2))',
+                                borderRadius: '4px',
+                                filter: 'blur(1px)',
+                                opacity: 0.6
+                            }}
+                        />
+                    </span>
+                    <br />
+                    <motion.span
+                        variants={itemVariants}
+                        style={{
+                            color: 'var(--text-secondary)',
+                            fontSize: '0.42em',
+                            fontWeight: 500,
+                            letterSpacing: '-0.5px',
+                            lineHeight: 1.6,
+                            display: 'block',
+                            marginTop: '0.5rem'
+                        }}
+                    >
+                        I build things for the web & secure them.
+                    </motion.span>
                 </motion.h1>
 
-                {/* Typing animation */}
+                {/* Typing animation with enhanced styling */}
                 <motion.div
                     variants={itemVariants}
                     style={{
-                        fontSize: '1.3rem',
+                        fontSize: '1.2rem',
                         fontFamily: 'var(--font-mono)',
                         color: 'var(--text-secondary)',
                         marginBottom: '2.5rem',
-                        minHeight: '2rem',
+                        minHeight: '2.5rem',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '0.5rem'
                     }}
                 >
-                    <span style={{ color: 'var(--text-muted)' }}>&gt;</span>
-                    <span style={{ color: 'var(--accent-2)' }}>{displayText}</span>
+                    <span style={{
+                        color: 'var(--accent-1)',
+                        opacity: 0.6,
+                        fontSize: '1rem'
+                    }}>{'<'}</span>
+                    <span style={{
+                        color: 'var(--accent-2)',
+                        textShadow: '0 0 20px rgba(0, 212, 255, 0.3)'
+                    }}>{displayText}</span>
                     <span style={{
                         width: '2px',
-                        height: '1.4em',
+                        height: '1.3em',
                         background: 'var(--accent-2)',
+                        boxShadow: '0 0 8px rgba(0, 212, 255, 0.5)',
                         animation: 'blink-caret 0.75s step-end infinite'
                     }} />
+                    <span style={{
+                        color: 'var(--accent-1)',
+                        opacity: 0.6,
+                        fontSize: '1rem'
+                    }}>{'/>'}</span>
                 </motion.div>
 
                 {/* CTA Buttons */}
@@ -244,27 +317,52 @@ const Hero = () => {
                     </a>
                 </motion.div>
 
-                {/* Stats Row */}
+                {/* Stats Row with glow cards */}
                 <motion.div
                     variants={itemVariants}
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
-                        gap: '3rem',
-                        marginTop: '4rem',
+                        gap: '2rem',
+                        marginTop: '4.5rem',
                         flexWrap: 'wrap'
                     }}
                 >
                     {[
-                        { value: '6+', label: 'Projects' },
-                        { value: '2+', label: 'Years Exp.' },
-                        { value: 'NFSU', label: 'M.Tech' },
+                        { value: `${count}+`, label: 'Projects', color: '#7c5cfc' },
+                        { value: '2+', label: 'Years Exp.', color: '#00d4ff' },
+                        { value: 'NFSU', label: 'M.Tech', color: '#ff6b9d' },
                     ].map((stat, i) => (
-                        <div key={i} style={{ textAlign: 'center' }}>
+                        <motion.div
+                            key={i}
+                            whileHover={{ scale: 1.08, y: -5 }}
+                            style={{
+                                textAlign: 'center',
+                                padding: '1.25rem 2rem',
+                                borderRadius: 'var(--radius-lg)',
+                                background: 'rgba(255,255,255,0.02)',
+                                border: '1px solid rgba(255,255,255,0.06)',
+                                cursor: 'default',
+                                position: 'relative',
+                                overflow: 'hidden',
+                                minWidth: '120px'
+                            }}
+                        >
+                            {/* Subtle top glow */}
                             <div style={{
-                                fontSize: '2rem',
+                                position: 'absolute',
+                                top: '-30px',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                width: '80px',
+                                height: '60px',
+                                background: `radial-gradient(ellipse, ${stat.color}20, transparent)`,
+                                pointerEvents: 'none'
+                            }} />
+                            <div style={{
+                                fontSize: '2.2rem',
                                 fontWeight: 800,
-                                background: 'var(--gradient-primary)',
+                                background: `linear-gradient(135deg, ${stat.color}, ${stat.color}aa)`,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
@@ -273,44 +371,66 @@ const Hero = () => {
                                 {stat.value}
                             </div>
                             <div style={{
-                                fontSize: '0.8rem',
+                                fontSize: '0.75rem',
                                 color: 'var(--text-muted)',
                                 fontFamily: 'var(--font-mono)',
-                                marginTop: '0.3rem',
-                                letterSpacing: '1px',
+                                marginTop: '0.4rem',
+                                letterSpacing: '1.5px',
                                 textTransform: 'uppercase'
                             }}>
                                 {stat.label}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </motion.div>
             </motion.div>
 
-            {/* Scroll indicator */}
+            {/* Enhanced scroll indicator */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 2 }}
+                transition={{ delay: 2.5 }}
                 style={{
                     position: 'absolute',
-                    bottom: '2rem',
+                    bottom: '2.5rem',
                     left: '50%',
                     transform: 'translateX(-50%)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '0.5rem'
+                    gap: '0.6rem'
                 }}
             >
-                <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                <span style={{
+                    fontSize: '0.65rem',
+                    fontFamily: 'var(--font-mono)',
+                    color: 'var(--text-muted)',
+                    letterSpacing: '3px',
+                    textTransform: 'uppercase'
+                }}>
                     Scroll
                 </span>
                 <motion.div
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                        width: '20px',
+                        height: '34px',
+                        borderRadius: '12px',
+                        border: '1.5px solid rgba(124, 92, 252, 0.3)',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        paddingTop: '6px'
+                    }}
                 >
-                    <FaChevronDown size={14} color="var(--text-muted)" />
+                    <motion.div
+                        animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                        style={{
+                            width: '3px',
+                            height: '8px',
+                            borderRadius: '3px',
+                            background: 'var(--accent-1)'
+                        }}
+                    />
                 </motion.div>
             </motion.div>
 
@@ -321,7 +441,10 @@ const Hero = () => {
                 }
                 @keyframes pulse-dot {
                     0%, 100% { opacity: 1; transform: scale(1); }
-                    50% { opacity: 0.5; transform: scale(1.3); }
+                    50% { opacity: 0.5; transform: scale(1.4); }
+                }
+                @media (max-width: 768px) {
+                    .hero-code-snippet { display: none !important; }
                 }
             `}</style>
         </section>

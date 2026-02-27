@@ -12,9 +12,9 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Detect active section
       const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-      for (const sec of sections.reverse()) {
+      const reversed = [...sections].reverse();
+      for (const sec of reversed) {
         const el = document.getElementById(sec);
         if (el && window.scrollY >= el.offsetTop - 200) {
           setActiveSection(sec);
@@ -35,150 +35,140 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const target = document.getElementById(href.slice(1));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: -100, x: '-50%', opacity: 0 }}
+        animate={{ y: 0, x: '-50%', opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
+          top: '1.2rem',
+          left: '50%',
           zIndex: 1000,
-          padding: scrolled ? '0.8rem 2rem' : '1.2rem 2rem',
-          background: scrolled ? 'rgba(8, 9, 10, 0.85)' : 'transparent',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
-          backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.3rem',
+          padding: '0.35rem',
+          background: 'rgba(10, 11, 18, 0.65)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          borderRadius: '100px',
+          border: '1px solid rgba(255,255,255,0.06)',
+          boxShadow: scrolled
+            ? '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)'
+            : '0 4px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03)',
+          transition: 'box-shadow 0.4s ease'
+        }}
+        className="desktop-nav-bar"
+      >
+        {navLinks.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
+            style={{
+              padding: '0.5rem 1.1rem',
+              borderRadius: '100px',
+              fontSize: '0.82rem',
+              fontWeight: 500,
+              color: activeSection === link.href.slice(1) ? '#fff' : 'var(--text-secondary)',
+              background: activeSection === link.href.slice(1) ? 'rgba(124, 92, 252, 0.2)' : 'transparent',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.2px'
+            }}
+            onMouseEnter={(e) => {
+              if (activeSection !== link.href.slice(1)) {
+                e.target.style.color = '#fff';
+                e.target.style.background = 'rgba(255,255,255,0.06)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeSection !== link.href.slice(1)) {
+                e.target.style.color = 'var(--text-secondary)';
+                e.target.style.background = 'transparent';
+              }
+            }}
+          >
+            {link.name}
+          </a>
+        ))}
+
+        {/* Divider */}
+        <div style={{ width: '1px', height: '18px', background: 'rgba(255,255,255,0.08)', margin: '0 0.25rem', flexShrink: 0 }} />
+
+        {/* Social icons */}
+        <a href="https://github.com/Patel-Prerak" target="_blank" rel="noopener noreferrer"
+          style={{
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            color: 'var(--text-secondary)',
+            transition: 'all 0.3s ease',
+            flexShrink: 0
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(124, 92, 252, 0.15)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
+        >
+          <FaGithub size={15} />
+        </a>
+        <a href="https://www.linkedin.com/in/prerak-patel-60a908219/" target="_blank" rel="noopener noreferrer"
+          style={{
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: '50%',
+            color: 'var(--text-secondary)',
+            transition: 'all 0.3s ease',
+            flexShrink: 0
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(0, 212, 255, 0.15)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
+        >
+          <FaLinkedin size={15} />
+        </a>
+      </motion.nav>
+
+      {/* Mobile Toggle — positioned separately */}
+      <button
+        className="mobile-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          display: 'none',
+          position: 'fixed',
+          top: '1.2rem',
+          right: '1.2rem',
+          zIndex: 1001,
+          background: 'rgba(10, 11, 18, 0.75)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          color: '#fff',
+          cursor: 'pointer',
+          width: '44px',
+          height: '44px',
+          borderRadius: '14px',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* Logo */}
-          <motion.a
-            href="#home"
-            whileHover={{ scale: 1.05 }}
-            style={{
-              fontSize: '1.4rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-sans)',
-              letterSpacing: '-0.5px',
-              color: 'var(--text-primary)',
-              textDecoration: 'none'
-            }}
-          >
-            <img src="/logo-v2.svg" alt="PP" style={{ height: '32px', width: 'auto' }} />
-          </motion.a>
-
-          {/* Desktop Navigation */}
-          <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.25rem',
-              background: 'rgba(255,255,255,0.04)',
-              borderRadius: '100px',
-              padding: '0.3rem',
-              border: '1px solid rgba(255,255,255,0.06)'
-            }}>
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  style={{
-                    padding: '0.5rem 1rem',
-                    borderRadius: '100px',
-                    fontSize: '0.85rem',
-                    fontWeight: 500,
-                    color: activeSection === link.href.slice(1) ? '#fff' : 'var(--text-secondary)',
-                    background: activeSection === link.href.slice(1) ? 'rgba(124, 92, 252, 0.2)' : 'transparent',
-                    textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                    whiteSpace: 'nowrap'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (activeSection !== link.href.slice(1)) {
-                      e.target.style.color = '#fff';
-                      e.target.style.background = 'rgba(255,255,255,0.06)';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (activeSection !== link.href.slice(1)) {
-                      e.target.style.color = 'var(--text-secondary)';
-                      e.target.style.background = 'transparent';
-                    }
-                  }}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-
-            <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.08)', margin: '0 0.75rem' }} />
-
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <a href="https://github.com/Patel-Prerak" target="_blank" rel="noopener noreferrer"
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  color: 'var(--text-secondary)',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(124, 92, 252, 0.15)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(124, 92, 252, 0.3)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}
-              >
-                <FaGithub size={16} />
-              </a>
-              <a href="https://www.linkedin.com/in/prerak-patel-60a908219/" target="_blank" rel="noopener noreferrer"
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  color: 'var(--text-secondary)',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 212, 255, 0.15)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(0, 212, 255, 0.3)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}
-              >
-                <FaLinkedin size={16} />
-              </a>
-            </div>
-          </div>
-
-          {/* Mobile Toggle */}
-          <button
-            className="mobile-toggle"
-            onClick={() => setIsOpen(!isOpen)}
-            style={{
-              display: 'none',
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: '#fff',
-              cursor: 'pointer',
-              width: '42px',
-              height: '42px',
-              borderRadius: '12px',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            {isOpen ? <HiX size={22} /> : <HiMenuAlt4 size={22} />}
-          </button>
-        </div>
-      </motion.nav>
+        {isOpen ? <HiX size={22} /> : <HiMenuAlt4 size={22} />}
+      </button>
 
       {/* Mobile Fullscreen Menu */}
       <AnimatePresence>
@@ -209,7 +199,14 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: i * 0.08 }}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  setTimeout(() => {
+                    const target = document.getElementById(link.href.slice(1));
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 300);
+                }}
                 style={{
                   fontSize: '2rem',
                   fontWeight: 700,
@@ -235,7 +232,7 @@ const Navbar = () => {
 
       <style>{`
         @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
+          .desktop-nav-bar { display: none !important; }
           .mobile-toggle { display: flex !important; }
         }
       `}</style>

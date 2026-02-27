@@ -27,10 +27,10 @@ function App() {
     };
 
     const animate = () => {
-      cursorX += (mouseX - cursorX) * 0.08;
-      cursorY += (mouseY - cursorY) * 0.08;
+      cursorX += (mouseX - cursorX) * 0.07;
+      cursorY += (mouseY - cursorY) * 0.07;
       if (cursor) {
-        cursor.style.transform = `translate(${cursorX - 20}px, ${cursorY - 20}px)`;
+        cursor.style.transform = `translate(${cursorX - 22}px, ${cursorY - 22}px)`;
       }
       requestAnimationFrame(animate);
     };
@@ -38,27 +38,31 @@ function App() {
     window.addEventListener('mousemove', mouseMove);
     animate();
 
-    // Scroll-triggered reveal animations
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    };
+    // === SCROLL REVEAL OBSERVER ===
+    // Observes any element with scroll-reveal, scroll-reveal-left, scroll-reveal-right, scroll-reveal-scale
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    );
 
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -60px 0px'
-    });
-
-    document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-      observer.observe(el);
+    // Observe all reveal elements
+    const revealSelector = '.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale';
+    document.querySelectorAll(revealSelector).forEach((el) => {
+      revealObserver.observe(el);
     });
 
     return () => {
       window.removeEventListener('mousemove', mouseMove);
-      observer.disconnect();
+      revealObserver.disconnect();
     };
   }, []);
 
@@ -77,41 +81,33 @@ function App() {
       {/* Custom Cursor */}
       <div
         ref={cursorRef}
+        className="custom-cursor-ring"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          border: '1.5px solid rgba(124, 92, 252, 0.5)',
-          pointerEvents: 'none',
-          zIndex: 9999,
+          position: 'fixed', top: 0, left: 0,
+          width: '44px', height: '44px', borderRadius: '50%',
+          border: '1.5px solid rgba(124, 92, 252, 0.4)',
+          pointerEvents: 'none', zIndex: 9999,
           mixBlendMode: 'difference',
-          transition: 'width 0.3s, height 0.3s',
+          transition: 'width 0.4s, height 0.4s, border-color 0.4s',
           display: 'none'
         }}
       />
       <div
         ref={cursorDotRef}
+        className="custom-cursor-dot"
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '8px',
-          height: '8px',
-          borderRadius: '50%',
-          background: '#fff',
-          pointerEvents: 'none',
-          zIndex: 9999,
-          display: 'none'
+          position: 'fixed', top: 0, left: 0,
+          width: '8px', height: '8px', borderRadius: '50%',
+          background: 'linear-gradient(135deg, #7c5cfc, #00d4ff)',
+          pointerEvents: 'none', zIndex: 9999,
+          display: 'none',
+          boxShadow: '0 0 10px rgba(124, 92, 252, 0.4)'
         }}
       />
       <style>{`
         @media (hover: hover) and (pointer: fine) and (min-width: 992px) {
-          .App .cursor,
-          .App > div[style*="width: 40px"],
-          .App > div[style*="width: 8px"] {
+          .custom-cursor-ring,
+          .custom-cursor-dot {
             display: block !important;
           }
         }
@@ -120,32 +116,16 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <div className="section-divider" />
         <About />
+        <div className="section-divider" />
         <Skills />
+        <div className="section-divider" />
         <Projects />
+        <div className="section-divider" />
         <Contact />
       </main>
       <Footer />
-
-      {/* Global reveal styles */}
-      <style>{`
-        .reveal-on-scroll {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-on-scroll.revealed {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-        .reveal-delay-5 { transition-delay: 0.5s; }
-        .reveal-delay-6 { transition-delay: 0.6s; }
-      `}</style>
     </div>
   );
 }
