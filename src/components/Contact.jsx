@@ -12,24 +12,24 @@ const Contact = () => {
             label: 'Email',
             value: 'patelprerak435@gmail.com',
             href: 'mailto:patelprerak435@gmail.com',
-            color: '#7c5cfc',
-            hoverBg: 'rgba(124, 92, 252, 0.08)'
+            color: '#00ff9d',
+            hoverBg: 'rgba(0, 255, 157, 0.08)'
         },
         {
             icon: <FaGithub size={24} />,
             label: 'GitHub',
             value: 'Patel-Prerak',
             href: 'https://github.com/Patel-Prerak',
-            color: '#00d4ff',
-            hoverBg: 'rgba(0, 212, 255, 0.08)'
+            color: '#00b8ff',
+            hoverBg: 'rgba(0, 184, 255, 0.08)'
         },
         {
             icon: <FaLinkedin size={24} />,
             label: 'LinkedIn',
             value: 'Prerak Patel',
             href: 'https://www.linkedin.com/in/prerak-patel-60a908219/',
-            color: '#ff6b9d',
-            hoverBg: 'rgba(255, 107, 157, 0.08)'
+            color: '#a855f7',
+            hoverBg: 'rgba(168, 85, 247, 0.08)'
         }
     ];
 
@@ -47,7 +47,7 @@ const Contact = () => {
                 transform: 'translate(-50%, -50%)',
                 width: '800px',
                 height: '800px',
-                background: 'radial-gradient(circle, rgba(124, 92, 252, 0.06) 0%, transparent 60%)',
+                background: 'radial-gradient(circle, rgba(0, 255, 157, 0.06) 0%, transparent 60%)',
                 pointerEvents: 'none'
             }} />
             <div style={{
@@ -56,7 +56,7 @@ const Contact = () => {
                 left: '-100px',
                 width: '400px',
                 height: '400px',
-                background: 'radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(0, 184, 255, 0.04) 0%, transparent 70%)',
                 pointerEvents: 'none'
             }} />
             <div style={{
@@ -65,7 +65,7 @@ const Contact = () => {
                 right: '-100px',
                 width: '400px',
                 height: '400px',
-                background: 'radial-gradient(circle, rgba(255, 107, 157, 0.04) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%)',
                 pointerEvents: 'none'
             }} />
 
@@ -226,7 +226,7 @@ const Contact = () => {
                     <div style={{
                         position: 'absolute',
                         inset: '-10px',
-                        background: 'linear-gradient(135deg, rgba(124,92,252,0.15), rgba(0,212,255,0.1), rgba(255,107,157,0.15))',
+                        background: 'linear-gradient(135deg, rgba(0, 255, 157, 0.15), rgba(0, 184, 255, 0.1), rgba(168, 85, 247, 0.15))',
                         filter: 'blur(25px)',
                         borderRadius: '40px',
                         pointerEvents: 'none',

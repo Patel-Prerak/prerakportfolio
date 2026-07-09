@@ -82,7 +82,7 @@ const Navbar = () => {
               fontSize: '0.82rem',
               fontWeight: 500,
               color: activeSection === link.href.slice(1) ? '#fff' : 'var(--text-secondary)',
-              background: activeSection === link.href.slice(1) ? 'rgba(124, 92, 252, 0.2)' : 'transparent',
+              background: activeSection === link.href.slice(1) ? 'rgba(0, 255, 157, 0.2)' : 'transparent',
               textDecoration: 'none',
               transition: 'all 0.3s ease',
               whiteSpace: 'nowrap',
@@ -121,7 +121,7 @@ const Navbar = () => {
             transition: 'all 0.3s ease',
             flexShrink: 0
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(124, 92, 252, 0.15)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(0, 255, 157, 0.15)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
         >
           <FaGithub size={15} />
@@ -138,7 +138,7 @@ const Navbar = () => {
             transition: 'all 0.3s ease',
             flexShrink: 0
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(0, 212, 255, 0.15)'; }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(0, 184, 255, 0.15)'; }}
           onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
         >
           <FaLinkedin size={15} />

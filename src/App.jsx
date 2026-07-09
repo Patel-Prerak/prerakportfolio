@@ -85,7 +85,7 @@ function App() {
         style={{
           position: 'fixed', top: 0, left: 0,
           width: '44px', height: '44px', borderRadius: '50%',
-          border: '1.5px solid rgba(124, 92, 252, 0.4)',
+          border: '1.5px solid rgba(0, 255, 157, 0.4)',
           pointerEvents: 'none', zIndex: 9999,
           mixBlendMode: 'difference',
           transition: 'width 0.4s, height 0.4s, border-color 0.4s',
@@ -98,10 +98,10 @@ function App() {
         style={{
           position: 'fixed', top: 0, left: 0,
           width: '8px', height: '8px', borderRadius: '50%',
-          background: 'linear-gradient(135deg, #7c5cfc, #00d4ff)',
+          background: 'linear-gradient(135deg, #00ff9d, #00b8ff)',
           pointerEvents: 'none', zIndex: 9999,
           display: 'none',
-          boxShadow: '0 0 10px rgba(124, 92, 252, 0.4)'
+          boxShadow: '0 0 10px rgba(0, 255, 157, 0.4)'
         }}
       />
       <style>{`

@@ -16,7 +16,7 @@ const Footer = () => {
                 left: 0,
                 right: 0,
                 height: '1px',
-                background: 'linear-gradient(90deg, transparent, rgba(124, 92, 252, 0.4), rgba(0, 212, 255, 0.3), rgba(255, 107, 157, 0.4), transparent)',
+                background: 'linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.4), rgba(0, 184, 255, 0.3), rgba(168, 85, 247, 0.4), transparent)',
             }} />
 
             <div className="container" style={{
@@ -49,7 +49,7 @@ const Footer = () => {
                             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                             style={{ display: 'inline-flex' }}
                         >
-                            <FaHeart size={10} color="#ff6b9d" />
+                            <FaHeart size={10} color="#ff3e3e" />
                         </motion.span>
                         {' '}in 2026
                     </p>
@@ -59,7 +59,7 @@ const Footer = () => {
                 <div style={{ textAlign: 'center' }}>
                     <motion.a
                         href="#home"
-                        whileHover={{ y: -4, boxShadow: '0 8px 25px rgba(124, 92, 252, 0.2)' }}
+                        whileHover={{ y: -4, boxShadow: '0 8px 25px rgba(0, 255, 157, 0.2)' }}
                         style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -75,9 +75,9 @@ const Footer = () => {
                             transition: 'all 0.3s'
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = 'rgba(124,92,252,0.3)';
+                            e.currentTarget.style.borderColor = 'rgba(0,255,157,0.3)';
                             e.currentTarget.style.color = '#fff';
-                            e.currentTarget.style.background = 'rgba(124,92,252,0.08)';
+                            e.currentTarget.style.background = 'rgba(0,255,157,0.08)';
                         }}
                         onMouseLeave={(e) => {
                             e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
@@ -92,8 +92,8 @@ const Footer = () => {
                 {/* Right - Social */}
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                     {[
-                        { icon: <FaGithub size={16} />, href: 'https://github.com/Patel-Prerak', color: '#7c5cfc' },
-                        { icon: <FaLinkedin size={16} />, href: 'https://www.linkedin.com/in/prerak-patel-60a908219/', color: '#00d4ff' }
+                        { icon: <FaGithub size={16} />, href: 'https://github.com/Patel-Prerak', color: '#00ff9d' },
+                        { icon: <FaLinkedin size={16} />, href: 'https://www.linkedin.com/in/prerak-patel-60a908219/', color: '#00b8ff' }
                     ].map((social, i) => (
                         <motion.a
                             key={i}

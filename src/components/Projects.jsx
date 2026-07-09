@@ -31,7 +31,7 @@ const Projects = () => {
             tech: ["Python", "AI/ML", "Computer Vision"],
             github: "https://github.com/Patel-Prerak/Crime-Scene-object-Identification-and-Detection",
             link: null,
-            accent: '#ff6b9d',
+            accent: '#ff3e3e',
             number: '01',
             emoji: '🔍'
         },
@@ -41,7 +41,7 @@ const Projects = () => {
             tech: ["React", "JavaScript", "3D/VR", "AI"],
             github: "https://github.com/Patel-Prerak/Concept-AI-VR-Based-Crime-Scene-Reconstruction-Platform",
             link: "https://vr-fawn-one.vercel.app",
-            accent: '#7c5cfc',
+            accent: '#00ff9d',
             number: '02',
             emoji: '🥽'
         },
@@ -51,7 +51,7 @@ const Projects = () => {
             tech: ["TypeScript", "React", "Vercel"],
             github: "https://github.com/Patel-Prerak/Clinic_infoweb",
             link: "https://clinic-info.vercel.app",
-            accent: '#00d4ff',
+            accent: '#00b8ff',
             number: '03',
             emoji: '🏥'
         },
@@ -61,7 +61,7 @@ const Projects = () => {
             tech: ["MERN Stack", "Redux", "JWT"],
             github: "https://github.com/Patel-Prerak/Sahayak",
             link: null,
-            accent: '#ffd166',
+            accent: '#facc15',
             number: '04',
             emoji: '🤝'
         },
@@ -71,7 +71,7 @@ const Projects = () => {
             tech: ["React Native", "Node.js", "Express"],
             github: null,
             link: "https://deployx.in/projects",
-            accent: '#4ade80',
+            accent: '#00ff9d',
             number: '05',
             emoji: '🛒'
         },
@@ -81,7 +81,7 @@ const Projects = () => {
             tech: ["TypeScript", "Node.js", "Security"],
             github: "https://github.com/Patel-Prerak/Email-Service-Provider",
             link: "https://email-service-provider.vercel.app",
-            accent: '#ff6b9d',
+            accent: '#ff3e3e',
             number: '06',
             emoji: '🔒'
         },
@@ -91,7 +91,7 @@ const Projects = () => {
             tech: ["PHP", "MySQL", "JavaScript"],
             github: "https://github.com/Patel-Prerak/blood-bank",
             link: null,
-            accent: '#ef4444',
+            accent: '#a855f7',
             number: '07',
             emoji: '🩸'
         },
@@ -252,7 +252,7 @@ const Projects = () => {
                 position: 'absolute',
                 bottom: '-250px', right: '-250px',
                 width: '700px', height: '700px',
-                background: 'radial-gradient(circle, rgba(255, 107, 157, 0.05) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(0, 184, 255, 0.05) 0%, transparent 70%)',
                 pointerEvents: 'none'
             }} />
 
@@ -322,15 +322,18 @@ const Projects = () => {
                     100% { transform: translateX(-50%); }
                 }
                 .project-card-item:hover {
-                    border-color: rgba(124,92,252,0.25) !important;
+                    border-color: rgba(0,255,157,0.25) !important;
                     transform: translateY(-6px) !important;
-                    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,92,252,0.15) !important;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,255,157,0.15) !important;
                 }
                 .project-card-item:hover h3 {
                     color: var(--accent-1) !important;
                 }
                 @media (max-width: 480px) {
-                    .projects-marquee-track > div { min-width: 300px !important; }
+                    .projects-marquee-track > div { 
+                        min-width: 280px !important; 
+                        max-width: 280px !important; 
+                    }
                     .projects-marquee-track { animation-duration: 30s; }
                 }
             `}</style>

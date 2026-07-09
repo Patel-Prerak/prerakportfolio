@@ -11,7 +11,7 @@ const Skills = () => {
     const skillCategories = [
         {
             title: 'Frontend',
-            color: '#7c5cfc',
+            color: '#00b8ff',
             emoji: '🎨',
             skills: [
                 { name: 'React', icon: <FaReact size={28} /> },
@@ -24,7 +24,7 @@ const Skills = () => {
         },
         {
             title: 'Backend',
-            color: '#00d4ff',
+            color: '#00ff9d',
             emoji: '⚙️',
             skills: [
                 { name: 'Node.js', icon: <FaNodeJs size={28} /> },
@@ -37,7 +37,7 @@ const Skills = () => {
         },
         {
             title: 'Security',
-            color: '#ff6b9d',
+            color: '#ff3e3e',
             emoji: '🛡️',
             skills: [
                 { name: 'Burp Suite', icon: <SiBurpsuite size={28} /> },
@@ -60,7 +60,7 @@ const Skills = () => {
                 left: '-250px',
                 width: '600px',
                 height: '600px',
-                background: 'radial-gradient(circle, rgba(124, 92, 252, 0.05) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(0, 255, 157, 0.05) 0%, transparent 70%)',
                 pointerEvents: 'none',
             }} />
             <div style={{
@@ -69,7 +69,7 @@ const Skills = () => {
                 right: '-200px',
                 width: '500px',
                 height: '500px',
-                background: 'radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(0, 184, 255, 0.04) 0%, transparent 70%)',
                 pointerEvents: 'none',
             }} />
 

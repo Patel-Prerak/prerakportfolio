@@ -6,17 +6,23 @@ import { FaArrowRight, FaChevronDown } from 'react-icons/fa';
 
 const FloatingCodeSnippet = ({ code, style, delay = 0 }) => (
     <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
+        className="hero-code-snippet"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5 + delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         style={{
             position: 'absolute',
             fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
-            color: 'rgba(124, 92, 252, 0.25)',
+            fontSize: '0.75rem',
+            color: 'rgba(0, 255, 157, 0.35)',
             whiteSpace: 'pre',
             pointerEvents: 'none',
             userSelect: 'none',
+            background: 'rgba(0, 255, 157, 0.02)',
+            border: '1px solid rgba(0, 255, 157, 0.1)',
+            padding: '1rem',
+            borderRadius: '8px',
+            backdropFilter: 'blur(4px)',
             ...style
         }}
     >
@@ -35,10 +41,10 @@ const Hero = () => {
     const [count, setCount] = useState(0);
 
     const roles = [
-        'Full Stack Developer',
-        'Cybersecurity Specialist',
-        'Co-Founder at DeployX',
-        'M.Tech @ NFSU'
+        'Full Stack Engineer',
+        'Cyber Security Specialist',
+        'Co-Founder @ DeployX',
+        'M.Tech AI & DS @ NFSU'
     ];
 
     useEffect(() => {
@@ -92,12 +98,12 @@ const Hero = () => {
             },
         },
         particles: {
-            color: { value: ["#7c5cfc", "#00d4ff", "#ff6b9d", "#ffd166"] },
+            color: { value: ["#00ff9d", "#00b8ff", "#ff3e3e", "#a855f7"] },
             links: {
-                color: "#7c5cfc",
+                color: "#00ff9d",
                 distance: 150,
                 enable: true,
-                opacity: 0.05,
+                opacity: 0.1,
                 width: 1,
             },
             move: {
@@ -108,10 +114,10 @@ const Hero = () => {
                 straight: false,
                 outModes: { default: "out" },
             },
-            number: { density: { enable: true, area: 1200 }, value: 50 },
-            opacity: { value: { min: 0.1, max: 0.5 } },
-            shape: { type: "circle" },
-            size: { value: { min: 1, max: 3 } },
+            number: { density: { enable: true, area: 1200 }, value: 70 },
+            opacity: { value: { min: 0.2, max: 0.6 } },
+            shape: { type: "square" },
+            size: { value: { min: 1, max: 2 } },
         },
         detectRetina: true,
     };
@@ -156,10 +162,10 @@ const Hero = () => {
                 position: 'absolute',
                 inset: 0,
                 backgroundImage: `
-                    linear-gradient(rgba(124, 92, 252, 0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(124, 92, 252, 0.04) 1px, transparent 1px)
+                    linear-gradient(rgba(0, 255, 157, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 255, 157, 0.05) 1px, transparent 1px)
                 `,
-                backgroundSize: '60px 60px',
+                backgroundSize: '40px 40px',
                 zIndex: 0,
                 maskImage: 'radial-gradient(ellipse 80% 60% at center, black 20%, transparent 70%)',
                 WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at center, black 20%, transparent 70%)'
@@ -179,7 +185,7 @@ const Hero = () => {
                     transform: 'translate(-50%, -50%)',
                     width: '1000px',
                     height: '1000px',
-                    background: 'radial-gradient(circle, rgba(124, 92, 252, 0.12) 0%, rgba(0, 212, 255, 0.05) 40%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(0, 255, 157, 0.08) 0%, rgba(0, 184, 255, 0.05) 30%, transparent 70%)',
                     zIndex: 0,
                     pointerEvents: 'none'
                 }}
@@ -187,18 +193,18 @@ const Hero = () => {
 
             {/* Floating code snippets - ambient decoration */}
             <FloatingCodeSnippet
-                code={`const dev = {\n  name: "Prerak",\n  role: "Full Stack"\n};`}
-                style={{ top: '15%', left: '8%' }}
+                code={`import { Security } from '@core';\n\nconst firewall = new Security.WAF();\nfirewall.blockThreats({ level: 'HIGH' });\nconsole.log("System Secured.");`}
+                style={{ top: '15%', left: '5%' }}
                 delay={0}
             />
             <FloatingCodeSnippet
-                code={`async function deploy() {\n  await build();\n  return "🚀";\n}`}
-                style={{ bottom: '20%', right: '6%' }}
+                code={`async function deployx_init() {\n  await infrastructure.scale();\n  return { status: 200, msg: "🚀" };\n}`}
+                style={{ bottom: '15%', right: '5%' }}
                 delay={0.3}
             />
             <FloatingCodeSnippet
-                code={`// securing the web\nif (threat) {\n  neutralize(threat);\n}`}
-                style={{ top: '25%', right: '10%' }}
+                code={`// Penetration Testing Module\nconst target = "network_perimeter";\nif (vulnScan(target).found) {\n  patchVulnerabilities(target);\n}`}
+                style={{ top: '22%', right: '8%' }}
                 delay={0.6}
             />
 
@@ -238,9 +244,9 @@ const Hero = () => {
                                 left: 0,
                                 height: '4px',
                                 background: 'linear-gradient(90deg, var(--accent-1), var(--accent-2))',
-                                borderRadius: '4px',
-                                filter: 'blur(1px)',
-                                opacity: 0.6
+                                borderRadius: '2px',
+                                filter: 'blur(2px)',
+                                opacity: 0.8
                             }}
                         />
                     </span>
@@ -286,10 +292,10 @@ const Hero = () => {
                         textShadow: '0 0 20px rgba(0, 212, 255, 0.3)'
                     }}>{displayText}</span>
                     <span style={{
-                        width: '2px',
-                        height: '1.3em',
-                        background: 'var(--accent-2)',
-                        boxShadow: '0 0 8px rgba(0, 212, 255, 0.5)',
+                        width: '8px',
+                        height: '1.1em',
+                        background: 'var(--accent-1)',
+                        boxShadow: '0 0 10px rgba(0, 255, 157, 0.6)',
                         animation: 'blink-caret 0.75s step-end infinite'
                     }} />
                     <span style={{
@@ -329,9 +335,9 @@ const Hero = () => {
                     }}
                 >
                     {[
-                        { value: `${count}+`, label: 'Projects', color: '#7c5cfc' },
-                        { value: '2+', label: 'Years Exp.', color: '#00d4ff' },
-                        { value: 'NFSU', label: 'M.Tech', color: '#ff6b9d' },
+                        { value: `${count}+`, label: 'Projects', color: '#00ff9d' },
+                        { value: '2+', label: 'Years Exp.', color: '#00b8ff' },
+                        { value: 'NFSU', label: 'M.Tech', color: '#a855f7' },
                     ].map((stat, i) => (
                         <motion.div
                             key={i}
@@ -428,7 +434,8 @@ const Hero = () => {
                             width: '3px',
                             height: '8px',
                             borderRadius: '3px',
-                            background: 'var(--accent-1)'
+                            background: 'var(--accent-1)',
+                            boxShadow: '0 0 8px rgba(0, 255, 157, 0.8)'
                         }}
                     />
                 </motion.div>

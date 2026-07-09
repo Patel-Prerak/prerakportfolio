@@ -17,32 +17,32 @@ const About = () => {
             icon: <FaBriefcase size={24} />,
             title: 'Co-Founder & CMO',
             subtitle: 'DeployX',
-            color: '#7c5cfc',
-            desc: 'Driving technical innovation and marketing strategy at a growing tech startup.',
+            color: '#00b8ff',
+            desc: 'Driving technical innovation and scaling secure infrastructure.',
             emoji: '🚀'
         },
         {
             icon: <FaGraduationCap size={24} />,
             title: 'M.Tech AI & DS',
-            subtitle: 'NFSU (MHA)',
-            color: '#00d4ff',
-            desc: 'Cyber Security specialization at National Forensic Sciences University.',
+            subtitle: 'NFSU',
+            color: '#a855f7',
+            desc: 'Specializing in Cyber Security at National Forensic Sciences University.',
             emoji: '🎓'
         },
         {
             icon: <FaCode size={24} />,
             title: 'Full Stack',
-            subtitle: 'Developer',
-            color: '#ff6b9d',
-            desc: 'MERN, TypeScript, Python — building scalable solutions end to end.',
+            subtitle: 'Engineer',
+            color: '#00ff9d',
+            desc: 'MERN, TypeScript, Python — building robust solutions end to end.',
             emoji: '💻'
         },
         {
             icon: <FaShieldAlt size={24} />,
-            title: 'Network Security',
+            title: 'Cyber Security',
             subtitle: 'Specialist',
-            color: '#ffd166',
-            desc: 'Penetration testing, cryptography, and digital forensics expert.',
+            color: '#ff3e3e',
+            desc: 'Penetration testing, threat analysis, and digital forensics.',
             emoji: '🔐'
         }
     ];
@@ -50,16 +50,17 @@ const About = () => {
     // Terminal typing effect
     const [termLines, setTermLines] = useState([]);
     const terminalCommands = [
-        { type: 'input', text: '$ whoami' },
-        { type: 'output', text: 'Prerak Patel — Full Stack Developer & Security Specialist' },
-        { type: 'input', text: '$ cat role.json' },
-        { type: 'output', text: '{ "title": "Co-Founder & CMO", "company": "DeployX" }' },
-        { type: 'input', text: '$ cat skills.json' },
-        { type: 'output', text: '["MERN", "TypeScript", "Python", "Cyber Security"]' },
-        { type: 'input', text: '$ ./scan --target portfolio' },
-        { type: 'output', text: '[✓] Full Stack Development... secured' },
-        { type: 'output', text: '[✓] Cyber Security... armed' },
-        { type: 'output', text: '[✓] Ready to deploy.' }
+        { type: 'input', text: 'root@prerak:~# whoami' },
+        { type: 'output', text: 'Prerak Patel — Full Stack Engineer & Cyber Security Specialist' },
+        { type: 'input', text: 'root@prerak:~# cat config.json' },
+        { type: 'output', text: '{ "title": "Co-Founder", "company": "DeployX", "status": "ACTIVE" }' },
+        { type: 'input', text: 'root@prerak:~# nmap -sV portfolio_target' },
+        { type: 'output', text: 'Starting Nmap ( https://nmap.org )' },
+        { type: 'output', text: '[✓] Port 80/tcp  open  http    MERN Stack' },
+        { type: 'output', text: '[✓] Port 443/tcp open  https   TypeScript & Python' },
+        { type: 'input', text: 'root@prerak:~# ./deploy --secure' },
+        { type: 'output', text: '[✓] Security protocols... armed.' },
+        { type: 'output', text: '[✓] System ready.' }
     ];
 
     useEffect(() => {
@@ -85,7 +86,7 @@ const About = () => {
                 right: '-250px',
                 width: '600px',
                 height: '600px',
-                background: 'radial-gradient(circle, rgba(0, 212, 255, 0.06) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(0, 255, 157, 0.04) 0%, transparent 70%)',
                 pointerEvents: 'none'
             }} />
             <div style={{
@@ -94,7 +95,7 @@ const About = () => {
                 left: '-200px',
                 width: '500px',
                 height: '500px',
-                background: 'radial-gradient(circle, rgba(124, 92, 252, 0.05) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(0, 184, 255, 0.04) 0%, transparent 70%)',
                 pointerEvents: 'none'
             }} />
 
@@ -223,7 +224,7 @@ const About = () => {
                             <div style={{
                                 position: 'absolute',
                                 inset: '-20px',
-                                background: 'radial-gradient(ellipse at center, rgba(124, 92, 252, 0.08), transparent 70%)',
+                                background: 'radial-gradient(ellipse at center, rgba(0, 255, 157, 0.08), transparent 70%)',
                                 pointerEvents: 'none',
                                 zIndex: -1
                             }} />
@@ -266,8 +267,8 @@ const About = () => {
                                             justifyContent: 'center',
                                             gap: '0.4rem'
                                         }}>
-                                            <span style={{ color: 'var(--accent-1)', opacity: 0.6 }}>⌘</span>
-                                            prerak@nfsu ~ /portfolio
+                                            <span style={{ color: 'var(--accent-3)' }}>⚡</span>
+                                            root@prerak:~
                                         </div>
                                     </div>
 
@@ -289,9 +290,9 @@ const About = () => {
                                             >
                                                 {line.type === 'input' ? (
                                                     <div style={{ color: 'var(--text-secondary)' }}>
-                                                        <span style={{ color: '#4ade80' }}>❯</span>{' '}
-                                                        <span style={{ color: 'var(--accent-2)' }}>{line.text.replace('$ ', '').split(' ')[0]}</span>{' '}
-                                                        <span style={{ color: 'var(--text-muted)' }}>{line.text.replace('$ ', '').split(' ').slice(1).join(' ')}</span>
+                                                        <span style={{ color: 'var(--accent-1)' }}>root@prerak:~#</span>{' '}
+                                                        <span style={{ color: 'var(--accent-2)' }}>{line.text.replace('root@prerak:~# ', '').split(' ')[0]}</span>{' '}
+                                                        <span style={{ color: 'var(--text-muted)' }}>{line.text.replace('root@prerak:~# ', '').split(' ').slice(1).join(' ')}</span>
                                                     </div>
                                                 ) : (
                                                     <div style={{
@@ -302,7 +303,7 @@ const About = () => {
                                                         opacity: line.text.startsWith('[✓]') ? 1 : 0.85
                                                     }}>
                                                         {line.text.startsWith('[✓]') && (
-                                                            <span style={{ textShadow: '0 0 10px rgba(74, 222, 128, 0.4)' }}>{line.text}</span>
+                                                            <span style={{ textShadow: '0 0 10px rgba(0, 255, 157, 0.4)', color: 'var(--accent-1)' }}>{line.text}</span>
                                                         )}
                                                         {!line.text.startsWith('[✓]') && line.text}
                                                     </div>
@@ -315,12 +316,12 @@ const About = () => {
                                             gap: '0.5rem',
                                             marginTop: '0.5rem'
                                         }}>
-                                            <span style={{ color: '#4ade80' }}>❯</span>
+                                            <span style={{ color: 'var(--accent-1)' }}>root@prerak:~#</span>
                                             <div style={{
                                                 width: '8px',
                                                 height: '18px',
                                                 background: 'var(--accent-1)',
-                                                boxShadow: '0 0 8px rgba(124, 92, 252, 0.5)',
+                                                boxShadow: '0 0 8px rgba(0, 255, 157, 0.5)',
                                                 animation: 'blink-caret 0.75s step-end infinite',
                                                 borderRadius: '1px'
                                             }} />
